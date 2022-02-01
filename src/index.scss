@@ -36,6 +36,12 @@ button{
   outline: none;
 }
 
+.clearfix{
+  content: '';
+  display: block;
+  clear: both;
+}
+
 .icon{
   width: 1em;
   height: 1em;
