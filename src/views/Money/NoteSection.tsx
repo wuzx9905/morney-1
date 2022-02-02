@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 
 const Wrapper = styled.section`
   background: #f1f4f4;
@@ -25,13 +25,18 @@ const Wrapper = styled.section`
   }
 `;
 
-const NoteSection: React.FunctionComponent = () => {
-    const [note, setNote] = useState('');
+type Props = {
+    value: string;
+    onChange:(value:string)=>void;
+}
+
+const NoteSection: React.FunctionComponent<Props> = (props) => {
+    const note = props.value
     const refInput = useRef<HTMLInputElement>(null);
     //非受控模式
     const onBlur = ()=>{
         if (refInput.current!==null) {
-            setNote(refInput.current.value)
+            props.onChange(refInput.current.value)
         }
     }
     return (
