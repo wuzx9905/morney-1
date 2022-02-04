@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const useTags = ()=>{
+const useTags = ()=>{ //封装自定义 Hook
     const [tags,setTags] = useState<string[]>(['衣','食','住','行'])
     return {tags, setTags}
 }
