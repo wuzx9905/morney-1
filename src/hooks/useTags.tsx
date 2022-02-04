@@ -1,14 +1,7 @@
 import {useEffect, useState} from 'react';
 import {createId} from 'lib/createId';
-import {useUpdate} from './hooks/useUpdate';
+import {useUpdate} from './useUpdate';
 
-
-const defaultTags = [
-    {id: createId(), name: '衣'},
-    {id: createId(), name: '食'},
-    {id: createId(), name: '住'},
-    {id: createId(), name: '行'}
-];
 const useTags = () => { //封装自定义 Hook
     const [tags, setTags] = useState<{ id: number; name: string }[]>([]);
 
@@ -23,7 +16,7 @@ const useTags = () => { //封装自定义 Hook
             ]
         }
         setTags(localTags);
-    },[])
+    },[]) //挂载时执行
 
     useUpdate(()=>{
         window.localStorage.setItem('tags',JSON.stringify(tags));
