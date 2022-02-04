@@ -21,7 +21,8 @@ const Wrapper = styled.section`
       padding: 4px 18px;
       font-size: 14px;
       margin: 8px 12px;
-      &.selected{
+
+      &.selected {
         background: #f60;
       }
     }
@@ -38,39 +39,40 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-    value:string[],
-    onChange: (selected:string[])=>void;
+    value: number[],
+    onChange: (selected: number[]) => void;
 }
 
 const TagsSection: React.FunctionComponent<Props> = (props) => {
-    const selectedTags = props.value;
-    const {tags,setTags} = useTags()
-    const onAddTag = ()=>{
-        const tagName = window.prompt('新标签的名称为')
-        if (tagName!==null){
-            setTags([...tags, tagName])
+    const selectedTagIds = props.value;
+    const {tags, setTags} = useTags();
+    const onAddTag = () => {
+        const tagName = window.prompt('新标签的名称为');
+        if (tagName !== null) {
+            setTags([...tags, {id: Math.random(), name: tagName}]);
         }
-    }
-    const onToggleTag = (tag:string)=>{
-        const index = selectedTags.indexOf(tag)
-        if (index>=0){
-            props.onChange(selectedTags.filter(t=>t!==tag))
-            //如果tag已被选中，就复制所有没有被选中的tag，作为新的selectedTag
-        }else{
-            props.onChange([...selectedTags,tag])
         }
-    }
-    const getClass = (tag:string)=>selectedTags.indexOf(tag)>=0?'selected':'';
-    return (
-        <Wrapper>
-            <ol>
-                {tags.map(tag=><li key={tag} onClick={()=> {onToggleTag(tag)}}
-                className={getClass(tag)}
-                >{tag}</li>)}
-            </ol>
-            <button onClick={onAddTag}>新增标签</button>
-        </Wrapper>
-    );
-};
+        const onToggleTag = (tagId: number) => {
+            const index = selectedTagIds.indexOf(tagId);
+            if (index >= 0) {
+                props.onChange(selectedTagIds.filter(t => t !== tagId));
+                //如果tag已被选中，就复制所有没有被选中的tag，作为新的selectedTag
+            } else {
+                props.onChange([...selectedTagIds, tagId]);
+            }
+        };
+        const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : '';
+        return (
+            <Wrapper>
+                <ol>
+                    {tags.map(tag => <li key={tag.id} onClick={() => {onToggleTag(tag.id);}}
+                                         className={getClass(tag.id)}
+                    >{tag.name}</li>)}
+                </ol>
+                <button onClick={onAddTag}>新增标签</button>
+            </Wrapper>
+        );
+    };
 
-export {TagsSection};
+
+    export {TagsSection};
