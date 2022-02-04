@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import {useTags} from '../../useTags';
+import {createId} from 'lib/createId';
 
 const Wrapper = styled.section`
   background: #FFFFFF;
@@ -49,30 +50,30 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
     const onAddTag = () => {
         const tagName = window.prompt('新标签的名称为');
         if (tagName !== null) {
-            setTags([...tags, {id: Math.random(), name: tagName}]);
+            setTags([...tags, {id: createId(), name: tagName}]);
         }
-        }
-        const onToggleTag = (tagId: number) => {
-            const index = selectedTagIds.indexOf(tagId);
-            if (index >= 0) {
-                props.onChange(selectedTagIds.filter(t => t !== tagId));
-                //如果tag已被选中，就复制所有没有被选中的tag，作为新的selectedTag
-            } else {
-                props.onChange([...selectedTagIds, tagId]);
-            }
-        };
-        const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : '';
-        return (
-            <Wrapper>
-                <ol>
-                    {tags.map(tag => <li key={tag.id} onClick={() => {onToggleTag(tag.id);}}
-                                         className={getClass(tag.id)}
-                    >{tag.name}</li>)}
-                </ol>
-                <button onClick={onAddTag}>新增标签</button>
-            </Wrapper>
-        );
     };
+    const onToggleTag = (tagId: number) => {
+        const index = selectedTagIds.indexOf(tagId);
+        if (index >= 0) {
+            props.onChange(selectedTagIds.filter(t => t !== tagId));
+            //如果tag已被选中，就复制所有没有被选中的tag，作为新的selectedTag
+        } else {
+            props.onChange([...selectedTagIds, tagId]);
+        }
+    };
+    const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : '';
+    return (
+        <Wrapper>
+            <ol>
+                {tags.map(tag => <li key={tag.id} onClick={() => {onToggleTag(tag.id);}}
+                                     className={getClass(tag.id)}
+                >{tag.name}</li>)}
+            </ol>
+            <button onClick={onAddTag}>新增标签</button>
+        </Wrapper>
+    );
+};
 
 
-    export {TagsSection};
+export {TagsSection};
