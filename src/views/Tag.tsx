@@ -52,8 +52,6 @@ const Tag: React.FC = () => {
     const onClickBack = () => {
         history.goBack();
     };
-
-
     return (
 
         <Layout>
