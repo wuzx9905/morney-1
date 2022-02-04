@@ -30,7 +30,17 @@ const useTags = () => { //封装自定义 Hook
         tagsClone.splice(index, 1, {id: id, name: obj.name});
         setTags(tagsClone); //不可变数据，不能直接修改原变量
     };
-    return {tags, setTags, findTag, updateTag, findTagIndex};
+    const deleteTag = (id:number)=>{
+        //获取下标
+        const index = findTagIndex(id);
+        //深拷贝tags
+        const tagsClone = JSON.parse(JSON.stringify(tags));
+        //把tagsClone的第index个删掉，换成{}
+        tagsClone.splice(index, 1);
+        setTags(tagsClone)
+    }
+    return {tags, setTags, findTag, updateTag, findTagIndex,deleteTag};
+
 };
 
 export {useTags};
