@@ -23,7 +23,13 @@ const useRecords = () => {
 
     const addRecord = (newRecord: newRecordItem) => {
         const record = {...newRecord, createdAt: (new Date()).toISOString()};
-        setRecords([...records, record]);
+        if (newRecord.tagIds[0]>1){
+            setRecords([...records, record]);
+            return 1;
+        }else{
+            alert('请选择相应的标签')
+            return -1;
+        }
     };
 
     return {records, addRecord};

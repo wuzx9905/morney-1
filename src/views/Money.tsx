@@ -35,12 +35,13 @@ function Money() {
         });
     };
     const submit = () => {
-        addRecord(selected);
-        alert('保存成功！')
-        setSelected(defaultFormData)
+        if (addRecord(selected)===1){
+            alert('保存成功！')
+            setSelected(defaultFormData)
+        }
     };
     return (
-        <MyLayout>
+        <MyLayout scrollTop={9999}>
             <TagsSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds})}/>
             <NoteSection value={selected.note} onChange={(note) => onChange({note})}/>
             <CategoryWrapper>
