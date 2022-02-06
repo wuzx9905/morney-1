@@ -1,6 +1,7 @@
 {
   "name": "money-1",
   "version": "0.1.0",
+  "homepage": "http://wuzx9905.github.io/morney-1-website",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
