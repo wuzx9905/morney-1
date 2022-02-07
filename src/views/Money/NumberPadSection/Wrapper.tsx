@@ -16,6 +16,7 @@ const Wrapper = styled.section`
 
   > .pad {
     > button {
+      cursor: pointer;
       font-size: 18px;
       float: left;
       width: 25%;

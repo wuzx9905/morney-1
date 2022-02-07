@@ -86,9 +86,9 @@ function Statistics() {
                         </Item>;
                     })
                     }
+
                 </div>
             </div>)}
-
         </Layout>
     );
 }

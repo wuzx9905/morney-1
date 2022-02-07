@@ -24,6 +24,7 @@ const Wrapper = styled.section`
       padding: 4px 18px;
       font-size: 14px;
       margin: 8px 12px;
+      cursor: pointer;
 
       &.selected {
         background: #f60;
@@ -38,6 +39,7 @@ const Wrapper = styled.section`
     border-bottom: 1px solid #333;
     color: #666;
     margin-top: 8px;
+    cursor: pointer;
   }
 `;
 
@@ -68,6 +70,7 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
                                      className={getClass(tag.id)}
                 >{tag.name}</li>)}
             </ol>
+
         </Wrapper>
     );
 };
