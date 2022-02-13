@@ -21,6 +21,7 @@ const Label = styled.label`
 
 type  Props = {
     label: string;
+    type?:string;
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 const Input: React.FunctionComponent<Props> = (props) => {

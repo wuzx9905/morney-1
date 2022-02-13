@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, {ChangeEventHandler} from 'react';
 import {Input} from '../../components/Input';
+import dayjs from 'dayjs';
 
 const Wrapper = styled.section`
   background: #f1f4f4;
@@ -11,17 +12,26 @@ const Wrapper = styled.section`
 type Props = {
     value: string;
     onChange:(value:string)=>void;
+    createdAt?: string;
+    type?:string;
+    label?:string;
 }
 
 const NoteSection: React.FunctionComponent<Props> = (props) => {
-    const note = props.value
+    let note = props.value
+    const type = props.type
+    const label = props.label
+    if (type==='date'){
+        note = dayjs(note).format('YYYY-MM-DD')
+    }
+    // const createdAt =  dayjs(props.createdAt).format('YYYY-MM-DD')
     //非受控模式
     const onChange:ChangeEventHandler<HTMLInputElement> = (e)=>{
             props.onChange(e.target.value)
     }
     return (
         <Wrapper>
-            <Input label="备注" type="text"
+            <Input label={label || ''} type={type}
                    value={note}
                    onChange={onChange}
                     placeholder="请填写备注"

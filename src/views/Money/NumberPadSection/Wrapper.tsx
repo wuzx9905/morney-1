@@ -22,6 +22,7 @@ const Wrapper = styled.section`
       width: 25%;
       height: 64px;
       border: none;
+      color: black;
 
       &.ok {
         height: 128px;

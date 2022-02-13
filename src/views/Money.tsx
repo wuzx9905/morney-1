@@ -17,13 +17,14 @@ type Category = '-' | '+'
 const defaultFormData = {
     tagIds: [] as number[],
     note: '',
+    createdAt: new Date().toISOString(),
     category: '-' as Category,
-    amount: 0
-}
+    amount: 0,
+};
 
 const CategoryWrapper = styled.div`
   background: #c4c4c4;
-`
+`;
 
 function Money() {
     const [selected, setSelected] = useState(defaultFormData);
@@ -35,15 +36,20 @@ function Money() {
         });
     };
     const submit = () => {
-        if (addRecord(selected)===1){
-            alert('保存成功！')
-            setSelected(defaultFormData)
+        if (addRecord(selected) === 1) {
+            alert('保存成功！');
+            setSelected(defaultFormData);
         }
     };
     return (
         <MyLayout scrollTop={9999}>
             <TagsSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds})}/>
-            <NoteSection value={selected.note} onChange={(note) => onChange({note})}/>
+            <NoteSection value={selected.createdAt} onChange={(createdAt) => onChange({createdAt})} type={'date'}
+                         label="日期" createdAt={new Date().toISOString()}
+            />
+            <NoteSection value={selected.note} onChange={(note) => onChange({note})} type={'text'}
+                         label="备注"
+            />
             <CategoryWrapper>
                 <CategorySection value={selected.category} onChange={(category) => onChange({category})}/>
             </CategoryWrapper>
