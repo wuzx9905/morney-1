@@ -5,6 +5,15 @@ import styled from 'styled-components';
 import {RecordItem, useRecords} from '../hooks/useRecords';
 import {useTags} from '../hooks/useTags';
 import day from 'dayjs';
+import {StatisticsChart} from './Statistics/StatisticsChart';
+
+const EchartWrapper = styled.div`
+    padding: 10px 16px;
+    .ReactEchart{
+      height: 300px;
+      max-width: 100%;
+    }
+`
 
 const CategoryWrapper = styled.div`
   background: white;
@@ -52,11 +61,17 @@ function Statistics() {
         return 0;
     });
 
+
     return (
         <Layout>
             <CategoryWrapper>
                 <CategorySection value={category} onChange={(value) => setCategory(value)}/>
             </CategoryWrapper>
+
+            <EchartWrapper className="echartWrapper">
+                <StatisticsChart />
+            </EchartWrapper>
+
 
             {array.map(([date,records])=> <div key={Math.random()}>
                 <Header>
