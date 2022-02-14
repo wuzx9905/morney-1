@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 const Wrapper = styled.section`
   background: #f1f4f4;
-  padding: 14px 16px;
+  padding: 12px 16px;
   font-size: 14px;
 `;
 
@@ -21,7 +21,7 @@ const NoteSection: React.FunctionComponent<Props> = (props) => {
     let note = props.value
     const type = props.type
     const label = props.label
-    if (type==='date'){
+    if (props.type==="date"){
         note = dayjs(note).format('YYYY-MM-DD')
     }
     // const createdAt =  dayjs(props.createdAt).format('YYYY-MM-DD')

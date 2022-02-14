@@ -17,7 +17,7 @@ type Category = '-' | '+'
 const defaultFormData = {
     tagIds: [] as number[],
     note: '',
-    createdAt: new Date().toISOString(),
+    createdAt: Date(),
     category: '-' as Category,
     amount: 0,
 };
@@ -25,6 +25,14 @@ const defaultFormData = {
 const CategoryWrapper = styled.div`
   background: #c4c4c4;
 `;
+
+const NoteSectionWrapper=styled.div`
+  section{
+    :first-child{
+      border-bottom: 1px solid #3333;
+    }
+  }
+`
 
 function Money() {
     const [selected, setSelected] = useState(defaultFormData);
@@ -44,12 +52,14 @@ function Money() {
     return (
         <MyLayout scrollTop={9999}>
             <TagsSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds})}/>
+            <NoteSectionWrapper>
             <NoteSection value={selected.createdAt} onChange={(createdAt) => onChange({createdAt})} type={'date'}
-                         label="日期" createdAt={new Date().toISOString()}
+                         label="日期"
             />
             <NoteSection value={selected.note} onChange={(note) => onChange({note})} type={'text'}
                          label="备注"
             />
+            </NoteSectionWrapper>
             <CategoryWrapper>
                 <CategorySection value={selected.category} onChange={(category) => onChange({category})}/>
             </CategoryWrapper>
