@@ -1,5 +1,5 @@
 import Layout from 'components/Layout';
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {CategorySection} from './Money/CategorySection';
 import styled from 'styled-components';
 import {RecordItem, useRecords} from '../hooks/useRecords';
@@ -8,12 +8,15 @@ import day from 'dayjs';
 import {StatisticsChart} from './Statistics/StatisticsChart';
 
 const EchartWrapper = styled.div`
-    padding: 10px 16px;
-    .ReactEchart{
-      height: 300px;
-      max-width: 100%;
-    }
-`
+  padding: 10px 12px;
+  overflow: auto;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+  .ReactEcharts {
+    width: 420%;
+  }
+`;
 
 const CategoryWrapper = styled.div`
   background: white;
@@ -38,7 +41,7 @@ const Header = styled.h3`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
-`
+`;
 
 function Statistics() {
     const [category, setCategory] = useState<'-' | '+'>('-');
@@ -61,6 +64,13 @@ function Statistics() {
         return 0;
     });
 
+    useEffect(()=>{
+        const wrapper= document.getElementsByClassName("EchartWrapper")[0]
+        if (wrapper){
+            (wrapper as HTMLDivElement).scrollLeft = 9999;
+        }
+    },[])
+
 
     return (
         <Layout>
@@ -68,12 +78,12 @@ function Statistics() {
                 <CategorySection value={category} onChange={(value) => setCategory(value)}/>
             </CategoryWrapper>
 
-            <EchartWrapper className="echartWrapper">
-                <StatisticsChart />
+            <EchartWrapper className="EchartWrapper">
+                <StatisticsChart/>
             </EchartWrapper>
 
 
-            {array.map(([date,records])=> <div key={Math.random()}>
+            {array.map(([date, records]) => <div key={Math.random()}>
                 <Header>
                     {date}
                 </Header>
@@ -85,8 +95,8 @@ function Statistics() {
                                     .map(tagId => <span key={tagId}>{getName(tagId)}</span>)
                                     //[span,span,span]
                                     //[span.',',span,',',span]
-                                    .reduce((result,span,index,array)=>
-                                        result.concat(index<array.length-1 ? [span,', '] : [span]),
+                                    .reduce((result, span, index, array) =>
+                                            result.concat(index < array.length - 1 ? [span, ', '] : [span]),
                                         [] as ReactNode[])
                                 }
                             </div>

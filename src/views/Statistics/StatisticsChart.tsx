@@ -4,26 +4,62 @@ import ReactECharts from 'echarts-for-react';
 
 const StatisticsChart: React.FC = () => {
     const options = {
+        grid:{
+          left:0,
+          right:0,
+        },
         xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: [
+                'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun',
+                'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun',
+                'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun',
+                'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun',
+            ],
+            axisTick:{
+                show:false
+            },
+            axisLine:{
+                lineStyle:{
+                    color: '#4a4a4a'
+                }
+            }
         },
         yAxis: {
-            type: 'value'
+            show:false
         },
         series: [
             {
-                data: [120, 200, 150, 80, 70, 110, 130],
+                data: [
+                    120, 200, 150, 80, 70, 110, 130,
+                    120, 200, 150, 80, 70, 110, 130,
+                    120, 200, 150, 80, 70, 110, 130,
+                    120, 200, 150, 80, 70, 110, 130
+                ],
+                detail:{
+                  show: true
+                },
                 type: 'bar',
-                color:['#53b534'],
+                color:['#80b77e'],
+                itemStyle:{
+                    opacity: 0.9
+                },
+                select:{
+                    itemStyle:{
+                        borderColor:'black'
+                    }
+                }
             }
         ],
         tooltip: {
             showContent: true,
-        }
+            triggerOn:'click',
+            formatter:'{c}',
+            position:'top'
+        },
     };
 
-    return <ReactECharts option={options} className="ReactECharts"/>;
+    return <ReactECharts option={options} className="ReactEcharts"/>;
 };
 
 // type Props = {
