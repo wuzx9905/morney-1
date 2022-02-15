@@ -9,7 +9,7 @@ import {StatisticsChart} from './Statistics/StatisticsChart';
 import _ from 'lodash';
 
 const ChartSeparator = styled.div`
-  margin: 4px 0 -20px 0;
+  margin: 4px 0 -10px 0;
   line-height: normal;
   font-size: 20px;
   padding: 4px 16px;

@@ -9,7 +9,6 @@ type Props={
 }
 
 const NumberPadSection: React.FunctionComponent<Props> = (props) => {
-    // const output = props.value.toString();
     const [output,_setOutput] = useState(props.value.toString())
     const setOutput = (output:string)=>{
         let newOutput:string;
