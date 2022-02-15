@@ -22,9 +22,8 @@ const NoteSection: React.FunctionComponent<Props> = (props) => {
     const type = props.type
     const label = props.label
     if (props.type==="date"){
-        note = dayjs(note).format('YYYY-MM-DD')
+            note = dayjs(note).format('YYYY-MM-DD')
     }
-    // const createdAt =  dayjs(props.createdAt).format('YYYY-MM-DD')
     //非受控模式
     const onChange:ChangeEventHandler<HTMLInputElement> = (e)=>{
             props.onChange(e.target.value)
@@ -34,7 +33,7 @@ const NoteSection: React.FunctionComponent<Props> = (props) => {
             <Input label={label || ''} type={type}
                    value={note}
                    onChange={onChange}
-                    placeholder="请填写备注"
+                    placeholder="请填写备注，注意一天只能添加一项喔！"
             >
             </Input>
         </Wrapper>
