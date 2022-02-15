@@ -17,7 +17,7 @@ const EchartWrapper = styled.div`
   }
 
   .ReactEcharts {
-    width: 420%;
+    width: 430%;
   }
 `;
 
@@ -74,8 +74,6 @@ function Statistics() {
         }
     }, []);
 
-    // console.log(records.map(r => _.pick(r, ['createdAt', 'amount'])));
-
     const today = new Date();
     const dayArray = [];
     for (let i = 0; i <= 29; i++) {
@@ -110,6 +108,12 @@ function Statistics() {
             axisLine: {
                 lineStyle: {
                     color: '#4a4a4a'
+                }
+            },
+            axisLabel:{
+                formatter: function (value:string){
+
+                    return value.substr(5);
                 }
             }
         },
