@@ -12,13 +12,13 @@ const ChartSeparator = styled.div`
   margin: 4px 0 -20px 0;
   line-height: normal;
   font-size: 20px;
-  padding: 0 16px;
-  //display: flex;
-  //justify-content: center;
+  padding: 4px 16px;
+  color: #363636;
 `
 
 const Separator = styled.div`
-  padding: 0 16px;
+  margin-top: -30px;
+  padding: 4px 16px;
   font-size: 20px;
 `
 
@@ -35,7 +35,8 @@ const EchartWrapper = styled.div`
 `;
 
 const CategoryWrapper = styled.div`
-  background: white;
+  background: #62b37a ;
+  color: white;
 `;
 
 const Item = styled.div`
@@ -58,6 +59,23 @@ const Header = styled.h3`
   line-height: 20px;
   padding: 10px 16px;
 `;
+
+const TotalAmount = styled.div`
+  background: #62b37a;
+  border-radius: 0 0 8px 8px;
+  color: white;
+  padding: 4px 16px;
+  font-size: 20px;
+  height: 100px;
+  >span{
+    font-size: 36px;
+  }
+`
+
+const StatisticsList = styled.div`
+  margin: -4px 0;
+  color: #363636;
+`
 
 function Statistics() {
     const [category, setCategory] = useState<'-' | '+'>('-');
@@ -89,12 +107,12 @@ function Statistics() {
 
     const today = new Date();
     let dayArray: any[] = [];
+    let totalAmount = 0;
     for (let i = 0; i <= 29; i++) {
         const dateString = day(today).subtract(i, 'day').format('YYYY-MM-DD');
         let found = _.find(selectedRecords, {createdAt: dateString});
-
+        totalAmount += found ? found.amount: 0;
         dayArray.push({key: dateString, value: found ? found.amount : 0});
-
     }
     dayArray.sort((a, b) => {
         if (a.key > b.key) {
@@ -105,13 +123,10 @@ function Statistics() {
             return -1;
         }
     });
-    console.log(dayArray);
 
     const chartOptions = () => {
         const keys = dayArray.map(item => item.key);
         const values = dayArray.map(item => item.value);
-
-
         return {
             grid: {
                 left: 0,
@@ -147,7 +162,7 @@ function Statistics() {
                     color: ['#80b77e'],
                     itemStyle: {
                         opacity: 0.9,
-                        normal:{
+
                             label:{
                                 show:true,
                                 formatter:'¥{c}',
@@ -156,7 +171,7 @@ function Statistics() {
                                     color: '#80b77e'
                                 }
                             }
-                        },
+                        ,
                     },
                     select: {
                         itemStyle: {
@@ -178,13 +193,20 @@ function Statistics() {
     };
 
 
+
     return (
         <Layout>
             <CategoryWrapper>
                 <CategorySection value={category} onChange={(value) => setCategory(value)}/>
             </CategoryWrapper>
 
-            <ChartSeparator>{category.charAt(0)=== '-'? "支出":"收入"}图示</ChartSeparator>
+            <TotalAmount>
+                <div>合计 :</div>
+                <span>¥ {totalAmount}</span>
+            </TotalAmount>
+
+            <ChartSeparator>{category.charAt(0)=== '-'? "支出":"收入"}对比</ChartSeparator>
+
 
             <EchartWrapper className="EchartWrapper">
                 <StatisticsChart>{chartOptions()}</StatisticsChart>
@@ -197,7 +219,7 @@ function Statistics() {
                 <Header>
                     {date}
                 </Header>
-                <div>
+                <StatisticsList>
                     {records.map(r => {
                         return <Item key={Math.random()}>
                             <div className="tags oneLine">
@@ -221,8 +243,7 @@ function Statistics() {
                         </Item>;
                     })
                     }
-
-                </div>
+                </StatisticsList>
             </div>)}
         </Layout>
     );

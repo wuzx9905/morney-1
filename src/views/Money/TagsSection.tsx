@@ -18,7 +18,9 @@ const Wrapper = styled.section`
     margin: 0 -12px;
 
     > li {
-      background: #D9D9D9;
+      color: white;
+      opacity: 0.6;
+      background: #9a9a9a;
       border-radius: 18px;
       display: inline-block;
       padding: 4px 18px;
@@ -27,17 +29,17 @@ const Wrapper = styled.section`
       cursor: pointer;
 
       &.selected {
-        background: #f60;
+        background: #62b37a;
       }
     }
   }
 
   > button {
+    color: #62b37a;
     background: none;
     border: none;
     padding: 2px 4px;
-    border-bottom: 1px solid #333;
-    color: #666;
+    border-bottom: 1px solid #62b37a;
     margin-top: 8px;
     cursor: pointer;
   }

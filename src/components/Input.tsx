@@ -17,6 +17,14 @@ const Label = styled.label`
     background: none;
     border: none;
   }
+  >input[type="date"]{
+    -webkit-align-items: center;
+    display: -webkit-inline-flex;
+    overflow: hidden;
+    color: #666;
+    padding: 0;
+    -webkit-padding-start: 1px;
+  }
 `;
 
 type  Props = {

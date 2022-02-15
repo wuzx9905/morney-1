@@ -5,6 +5,12 @@ const Center = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: #000;
+  >Button{
+    background: #62b37a;
+    opacity: 0.95;
+    color: white;
+  }
 `;
 
 export {Center}

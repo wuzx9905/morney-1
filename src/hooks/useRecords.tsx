@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useUpdate} from './useUpdate';
+import {createId} from '../lib/createId';
+import {Modal} from 'antd';
 
 export type RecordItem = {
     tagIds: number[],
@@ -22,7 +24,6 @@ const useRecords = () => {
     }, records);
 
     const addRecord = (newRecord: RecordItem) => {
-        // const record = {...newRecord, createdAt: (new Date()).toISOString()};
         const record = {...newRecord};
         if (newRecord.tagIds[0]>=1){
             setRecords([...records, record]);

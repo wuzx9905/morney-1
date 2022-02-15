@@ -24,10 +24,13 @@ const defaultFormData = {
 };
 
 const CategoryWrapper = styled.div`
-  background: #c4c4c4;
+  background: #62b37a;
+  color: white;
 `;
 
 const NoteSectionWrapper=styled.div`
+  color: black;
+  
   section{
     :first-child{
       border-bottom: 1px solid #3333;

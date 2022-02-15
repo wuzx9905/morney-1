@@ -16,14 +16,18 @@ const NavWrapper = styled.nav`
         flex-direction: column;
         padding: 4px 0;
         align-items: center;
+        color: slategrey;
+        opacity: 0.8;
         .icon{
           width: 24px;
           height: 24px;
+          opacity: 0.6;
         }
         &.selected{
-          color: slategray;
+          color: #62b37a;
           .icon{
-            fill: slategray;
+            fill: #62b37a;
+            opacity: 1;
           }
         }
       }

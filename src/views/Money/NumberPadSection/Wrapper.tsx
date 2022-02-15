@@ -7,6 +7,7 @@ const Wrapper = styled.section`
   > .output {
     background: white;
     font-size: 36px;
+    color:  #62b37a;
     line-height: 72px;
     text-align: right;
     padding: 0 16px;
@@ -22,7 +23,7 @@ const Wrapper = styled.section`
       width: 25%;
       height: 64px;
       border: none;
-      color: black;
+      color: white;
 
       &.ok {
         height: 128px;
@@ -34,38 +35,44 @@ const Wrapper = styled.section`
       }
 
       &:nth-child(1) {
-        background: #f2f2f2;
+        background: #62b37a;
+        opacity: 0.45;
       }
 
       &:nth-child(2),
       &:nth-child(5) {
-        background: #e0e0e0;
+        background: #62b37a;
+        opacity: 0.5;
       }
 
       &:nth-child(3),
       &:nth-child(6),
       &:nth-child(9) {
-        background: #d3d3d3;
+        background: #62b37a;
+        opacity: 0.6;
       }
 
       &:nth-child(4),
       &:nth-child(7),
       &:nth-child(10) {
-        background: #c1c1c1;
+        background: #62b37a;
+        opacity: 0.7;
       }
 
       &:nth-child(8),
       &:nth-child(11),
       &:nth-child(13) {
-        background: #b8b8b8;
+        background: #62b37a;
+        opacity: 0.8;
       }
 
       &:nth-child(12) {
-        background: #9a9a9a;
+        background: #62b37a;
       }
 
       &:nth-child(14) {
-        background: #a9a9a9;
+        background: #62b37a;
+        opacity: 0.95;
       }
     }
     @media(max-height: 570px){

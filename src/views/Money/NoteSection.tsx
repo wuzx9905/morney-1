@@ -7,6 +7,10 @@ const Wrapper = styled.section`
   background: #f1f4f4;
   padding: 12px 16px;
   font-size: 14px;
+  
+  >label{
+    color:#2BA245
+  }
 `;
 
 type Props = {
