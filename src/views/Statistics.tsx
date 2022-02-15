@@ -6,13 +6,16 @@ import {RecordItem, useRecords} from '../hooks/useRecords';
 import {useTags} from '../hooks/useTags';
 import day from 'dayjs';
 import {StatisticsChart} from './Statistics/StatisticsChart';
+import _ from 'lodash';
 
 const EchartWrapper = styled.div`
   padding: 10px 12px;
   overflow: auto;
-  &::-webkit-scrollbar{
+
+  &::-webkit-scrollbar {
     display: none;
   }
+
   .ReactEcharts {
     width: 420%;
   }
@@ -64,12 +67,80 @@ function Statistics() {
         return 0;
     });
 
-    useEffect(()=>{
-        const wrapper= document.getElementsByClassName("EchartWrapper")[0]
-        if (wrapper){
-            (wrapper as HTMLDivElement).scrollLeft = 9999;
+    useEffect(() => {
+        const wrapper = document.getElementsByClassName('EchartWrapper')[0];
+        if (wrapper) {
+            (wrapper as HTMLDivElement).scrollLeft = wrapper.scrollWidth;
         }
-    },[])
+    }, []);
+
+    // console.log(records.map(r => _.pick(r, ['createdAt', 'amount'])));
+
+    const today = new Date();
+    const dayArray = [];
+    for (let i = 0; i <= 29; i++) {
+        const dateString = day(today).subtract(i,'day').format('YYYY-MM-DD')
+        const found = _.find(records,{createdAt:dateString})
+        dayArray.push({date: dateString, value: found ? found.amount : 0});
+    }
+    dayArray.sort((a,b)=> {
+        if (a.date > b.date){
+            return 1
+        }else if (a.date === b.date){
+            return 0
+        }else{
+            return -1
+        }
+    })
+    const keys = dayArray.map(item=>item.date)
+    const values = dayArray.map(item=>item.value)
+
+
+    const options = {
+        grid: {
+            left: 0,
+            right: 0,
+        },
+        xAxis: {
+            type: 'category',
+            data: keys,
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#4a4a4a'
+                }
+            }
+        },
+        yAxis: {
+            show: false
+        },
+        series: [
+            {
+                data: values,
+                detail: {
+                    show: true
+                },
+                type: 'bar',
+                color: ['#80b77e'],
+                itemStyle: {
+                    opacity: 0.9
+                },
+                select: {
+                    itemStyle: {
+                        borderColor: 'black'
+                    }
+                }
+            }
+        ],
+        tooltip: {
+            showContent: true,
+            triggerOn: 'click',
+            formatter: '{b}\r\r{c}',
+            position: 'top'
+        },
+    };
 
 
     return (
@@ -79,7 +150,7 @@ function Statistics() {
             </CategoryWrapper>
 
             <EchartWrapper className="EchartWrapper">
-                <StatisticsChart/>
+                <StatisticsChart>{options}</StatisticsChart>
             </EchartWrapper>
 
 
